@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>班主任沟通助手</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="返回首页">
+          <span class="brand-mark" aria-hidden="true">沟</span>
+          <span>
+            <strong>班主任沟通助手</strong>
+            <small>班主任与各科老师都可用的家校沟通工具</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span class="sr-only">展开导航</span>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="主导航">
+          <button class="nav-link active" type="button" data-page="home">首页</button>
+          <button class="nav-link" type="button" data-page="generator">生成话术</button>
+          <button class="nav-link" type="button" data-page="library">我的话术库</button>
+          <button class="nav-link" type="button" data-page="blocked">不喜欢的表达</button>
+          <button class="nav-link" type="button" data-page="style">我的风格</button>
+          <button class="nav-link" type="button" data-page="history">历史记录</button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="page active" id="page-home" data-page="home" aria-labelledby="home-title">
+          <div class="home-grid">
+            <div class="home-intro">
+              <p class="eyebrow">无需登录 · 本地生成 · 不上传学生信息</p>
+              <h1 id="home-title">遇到家校沟通不知道怎么说？</h1>
+              <p class="lead">
+                输入一个真实但去隐私化的班级场景，自动生成简短版、温和版、正式版家校沟通话术。
+              </p>
+              <div class="home-actions">
+                <button class="primary-action" type="button" data-jump="generator">立即生成话术</button>
+                <button class="secondary-action" type="button" data-scroll="home-example">先看示例</button>
+              </div>
+            </div>
+            <div class="quick-panel" aria-label="工具概览">
+              <article class="example-card" id="home-example" aria-labelledby="home-example-title">
+                <p class="eyebrow">生成示例</p>
+                <h2 id="home-example-title">生成示例</h2>
+                <div class="example-block">
+                  <span>输入示例</span>
+                  <p>“小A最近两次数学作业没有按时提交，希望提醒家长配合关注。”</p>
+                </div>
+                <div class="example-block output">
+                  <span>输出示例</span>
+                  <p>“家长您好，想和您简单反馈一下孩子最近的数学作业情况。最近两次作业提交不太稳定，可能在时间安排上还需要一些提醒。麻烦您这几天在家帮忙关注一下，我这边也会继续跟进，我们一起帮助孩子慢慢调整好。”</p>
+                </div>
+              </article>
+              <div class="quick-card">
+                <span class="quick-number" id="stat-library">0</span>
+                <span>我的话术</span>
+              </div>
+              <div class="quick-card">
+                <span class="quick-number" id="stat-blocked">0</span>
+                <span>避免表达</span>
+              </div>
+              <div class="quick-card">
+                <span class="quick-number" id="stat-history">0</span>
+                <span>生成记录</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-strip" aria-label="核心功能">
+            <article>
+              <h2>模板生成</h2>
+              <p>内置 10 个常见沟通场景，生成简短版、温和版、正式版和使用建议。</p>
+            </article>
+            <article>
+              <h2>个人语气</h2>
+              <p>保存常用开头、常用结尾、默认语气和需要避免的沟通风格。</p>
+            </article>
+            <article>
+              <h2>本地保存</h2>
+              <p>话术库、不喜欢表达和历史记录都保存在当前浏览器里。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" id="page-generator" data-page="generator" aria-labelledby="generator-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">生成话术</p>
+              <h1 id="generator-title">填写沟通背景</h1>
+            </div>
+            <p>先选场景，再补充具体情况。系统会结合你的话术库和个人风格生成结果。</p>
+          </div>
+
+          <div class="workspace-grid">
+            <form class="panel form-panel" id="generator-form">
+              <div class="field-grid">
+                <label>
+                  <span>学段</span>
+                  <select id="stage" required>
+                    <option value="幼儿园">幼儿园</option>
+                    <option value="小学" selected>小学</option>
+                    <option value="初中">初中</option>
+                    <option value="高中">高中</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>教师身份/任教学科</span>
+                  <select id="teacher-role" required>
+                    <option value="班主任" selected>班主任</option>
+                    <option value="幼儿园老师">幼儿园老师</option>
+                    <option value="语文老师">语文老师</option>
+                    <option value="数学老师">数学老师</option>
+                    <option value="英语老师">英语老师</option>
+                    <option value="科学老师">科学老师</option>
+                    <option value="道德与法治老师">道德与法治老师</option>
+                    <option value="历史老师">历史老师</option>
+                    <option value="地理老师">地理老师</option>
+                    <option value="物理老师">物理老师</option>
+                    <option value="化学老师">化学老师</option>
+                    <option value="生物老师">生物老师</option>
+                    <option value="体育老师">体育老师</option>
+                    <option value="音乐老师">音乐老师</option>
+                    <option value="美术老师">美术老师</option>
+                    <option value="信息科技老师">信息科技老师</option>
+                    <option value="心理老师">心理老师</option>
+                    <option value="其他任课老师">其他任课老师</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>沟通对象</span>
+                  <select id="audience" required>
+                    <option value="家长个人" selected>家长个人</option>
+                    <option value="班级群">班级群</option>
+                    <option value="学生本人">学生本人</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>沟通场景</span>
+                  <select id="scenario" required>
+                    <option value="催作业">催作业</option>
+                    <option value="多次未交作业">多次未交作业</option>
+                    <option value="上课讲话走神">上课讲话走神</option>
+                    <option value="成绩退步">成绩退步</option>
+                    <option value="表扬进步">表扬进步</option>
+                    <option value="情绪低落">情绪低落</option>
+                    <option value="同学冲突">同学冲突</option>
+                    <option value="班级活动通知">班级活动通知</option>
+                    <option value="家长会通知">家长会通知</option>
+                    <option value="安全提醒">安全提醒</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>语气风格</span>
+                  <select id="tone" required>
+                    <option value="温和" selected>温和</option>
+                    <option value="正式">正式</option>
+                    <option value="委婉">委婉</option>
+                    <option value="坚定">坚定</option>
+                    <option value="鼓励">鼓励</option>
+                    <option value="有边界感">有边界感</option>
+                  </select>
+                </label>
+              </div>
+
+              <label class="full-field">
+                <span>具体情况</span>
+                <textarea id="details" rows="7" maxlength="600" placeholder="例如：小A最近两次数学作业没有按时提交，希望提醒家长在家关注一下。"></textarea>
+              </label>
+              <div class="sample-actions" aria-label="一键填入示例">
+                <button class="chip-button" type="button" data-example-scenario="多次未交作业" data-fill-example="小A最近两次数学作业没有按时提交，希望提醒家长配合关注。">没交作业</button>
+                <button class="chip-button" type="button" data-example-scenario="上课讲话走神" data-fill-example="小A最近上课容易和同桌讲话，影响听课状态，希望和家长一起提醒孩子提高课堂专注度。">上课讲话</button>
+                <button class="chip-button" type="button" data-example-scenario="成绩退步" data-fill-example="小A这次数学测试比上次退步明显，希望和家长一起帮助孩子分析原因、调整状态。">成绩退步</button>
+                <button class="chip-button" type="button" data-example-scenario="表扬进步" data-fill-example="小A最近上课更积极，作业也比之前认真，希望把这个进步反馈给家长。">表扬进步</button>
+              </div>
+              <div class="privacy-note">
+                <strong>合规提醒</strong>
+                <span>请勿输入学生真实姓名、手机号、家庭住址、身份证号、照片、健康情况等敏感信息。可以使用‘小A’‘某同学’‘孩子’等代称。</span>
+              </div>
+              <p class="inline-warning hidden" id="privacy-warning">检测到疑似手机号、身份证号或其他敏感信息，请先删除或匿名化后再生成。</p>
+
+              <div class="form-actions">
+                <button class="primary-action" type="submit">生成话术</button>
+                <button class="secondary-action" type="button" id="clear-generator">清空内容</button>
+              </div>
+            </form>
+
+            <aside class="panel hint-panel">
+              <h2>生成时会参考</h2>
+              <ul class="check-list">
+                <li>当前选择的学段、教师身份、对象、场景和语气</li>
+                <li>你保存的常用开头、结尾和默认语气</li>
+                <li>话术库中与场景或语气相近的表达</li>
+                <li>不喜欢的表达会被过滤或替换为更中性的说法</li>
+              </ul>
+            </aside>
+          </div>
+
+          <div class="result-grid" id="results" aria-live="polite"></div>
+          <div class="result-note">
+            <p>生成内容仅供参考，请老师结合真实情况修改后使用。</p>
+            <p>当前试用版的数据仅保存在你的浏览器本地，更换设备或清除缓存后可能丢失。</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-library" data-page="library" aria-labelledby="library-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">我的话术库</p>
+              <h1 id="library-title">保存自己的常用表达</h1>
+            </div>
+            <p>把你平时说得顺手、家长也容易接受的话术保存下来，生成时会优先参考。</p>
+          </div>
+
+          <div class="workspace-grid">
+            <form class="panel form-panel" id="library-form">
+              <input type="hidden" id="library-id">
+              <label class="full-field">
+                <span>话术内容</span>
+                <textarea id="library-content" rows="6" required maxlength="800" placeholder="例如：想和您简单反馈一下孩子近期的学习状态，我们先一起看看原因，再商量一个可执行的小目标。"></textarea>
+              </label>
+              <div class="field-grid">
+                <label>
+                  <span>适用场景</span>
+                  <input id="library-scenario" type="text" required maxlength="40" placeholder="如：催作业、情绪低落">
+                </label>
+                <label>
+                  <span>语气标签</span>
+                  <input id="library-tone" type="text" maxlength="40" placeholder="如：温和、鼓励">
+                </label>
+              </div>
+              <div class="form-actions">
+                <button class="primary-action" type="submit" id="library-submit">新增话术</button>
+                <button class="secondary-action hidden" type="button" id="cancel-library-edit">取消编辑</button>
+              </div>
+            </form>
+
+            <div class="panel list-panel">
+              <label class="search-box">
+                <span>搜索话术</span>
+                <input id="library-search" type="search" placeholder="输入场景、语气或内容">
+              </label>
+              <div class="item-list" id="library-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-blocked" data-page="blocked" aria-labelledby="blocked-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">不喜欢的表达</p>
+              <h1 id="blocked-title">过滤不想出现的话</h1>
+            </div>
+            <p>添加你不希望在生成话术里出现的表达，系统会尽量避开或替换。</p>
+          </div>
+
+          <div class="workspace-grid slim-grid">
+            <form class="panel form-panel" id="blocked-form">
+              <label class="full-field">
+                <span>不喜欢的表达</span>
+                <textarea id="blocked-content" rows="4" required maxlength="300" placeholder="例如：你家孩子又没写作业"></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="primary-action" type="submit">添加表达</button>
+              </div>
+            </form>
+
+            <div class="panel list-panel">
+              <label class="search-box">
+                <span>搜索表达</span>
+                <input id="blocked-search" type="search" placeholder="输入关键词">
+              </label>
+              <div class="item-list" id="blocked-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-style" data-page="style" aria-labelledby="style-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">我的沟通风格</p>
+              <h1 id="style-title">设置默认表达习惯</h1>
+            </div>
+            <p>这些设置会参与话术生成，让结果更接近你的日常沟通方式。</p>
+          </div>
+
+          <form class="panel form-panel wide-panel" id="style-form">
+            <div class="field-grid">
+              <label>
+                <span>默认身份/学科</span>
+                <select id="style-teacher-role">
+                  <option value="班主任">班主任</option>
+                  <option value="幼儿园老师">幼儿园老师</option>
+                  <option value="语文老师">语文老师</option>
+                  <option value="数学老师">数学老师</option>
+                  <option value="英语老师">英语老师</option>
+                  <option value="科学老师">科学老师</option>
+                  <option value="道德与法治老师">道德与法治老师</option>
+                  <option value="历史老师">历史老师</option>
+                  <option value="地理老师">地理老师</option>
+                  <option value="物理老师">物理老师</option>
+                  <option value="化学老师">化学老师</option>
+                  <option value="生物老师">生物老师</option>
+                  <option value="体育老师">体育老师</option>
+                  <option value="音乐老师">音乐老师</option>
+                  <option value="美术老师">美术老师</option>
+                  <option value="信息科技老师">信息科技老师</option>
+                  <option value="心理老师">心理老师</option>
+                  <option value="其他任课老师">其他任课老师</option>
+                </select>
+              </label>
+              <label>
+                <span>默认语气</span>
+                <select id="style-default-tone">
+                  <option value="温和">温和</option>
+                  <option value="正式">正式</option>
+                  <option value="亲切">亲切</option>
+                  <option value="坚定">坚定</option>
+                  <option value="鼓励">鼓励</option>
+                </select>
+              </label>
+              <label>
+                <span>常用开头</span>
+                <select id="style-opening">
+                  <option value="家长您好">家长您好</option>
+                  <option value="各位家长好">各位家长好</option>
+                  <option value="想和您简单反馈一下">想和您简单反馈一下</option>
+                </select>
+              </label>
+              <label>
+                <span>常用结尾</span>
+                <select id="style-ending">
+                  <option value="感谢配合">感谢配合</option>
+                  <option value="我们一起关注">我们一起关注</option>
+                  <option value="后续我也会继续跟进">后续我也会继续跟进</option>
+                </select>
+              </label>
+            </div>
+
+            <fieldset class="avoid-fieldset">
+              <legend>避免风格</legend>
+              <label><input type="checkbox" name="avoidStyle" value="指责家长"> 指责家长</label>
+              <label><input type="checkbox" name="avoidStyle" value="羞辱学生"> 羞辱学生</label>
+              <label><input type="checkbox" name="avoidStyle" value="夸大问题"> 夸大问题</label>
+              <label><input type="checkbox" name="avoidStyle" value="制造焦虑"> 制造焦虑</label>
+            </fieldset>
+
+            <div class="form-actions">
+              <button class="primary-action" type="submit">保存风格</button>
+              <button class="secondary-action" type="button" id="reset-style">恢复默认</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="page" id="page-history" data-page="history" aria-labelledby="history-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">历史记录</p>
+              <h1 id="history-title">最近 20 次生成结果</h1>
+            </div>
+            <p>自动保存生成记录，方便查看、复制和删除。</p>
+          </div>
+
+          <div class="panel list-panel wide-panel">
+            <div class="history-toolbar">
+              <label class="search-box">
+                <span>搜索历史</span>
+                <input id="history-search" type="search" placeholder="输入身份、场景或具体情况">
+              </label>
+              <button class="secondary-action" type="button" id="clear-history">清空历史</button>
+            </div>
+            <div class="item-list" id="history-list"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="feedback-footer">
+        <a class="primary-action feedback-button" href="#">提交试用反馈</a>
+        <p>欢迎老师反馈话术是否真实可用。</p>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
